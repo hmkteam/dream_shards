@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- The game's background colour (body / canvas clear colour). The launch
+         window, the activity window and the WebView before its first frame are
+         all filled with it, so launch → game never flashes white. -->
+    <color name="app_background">#06060F</color>
+</resources>

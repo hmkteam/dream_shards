@@ -1,0 +1,17 @@
+{
+  "appId": "com.hmkteam.dreamshards",
+  "appName": "Dream Shards",
+  "webDir": "game",
+  "android": {
+    "allowMixedContent": false,
+    "captureInput": true,
+    "webContentsDebuggingEnabled": true
+  },
+  "plugins": {
+    "SystemBars": {
+      "hidden": true,
+      "insetsHandling": "disable",
+      "style": "DARK"
+    }
+  }
+}

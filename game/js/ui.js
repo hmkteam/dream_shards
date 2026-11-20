@@ -113,7 +113,8 @@ const UI = {
     ctx.font = '14px sans-serif';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
-    ctx.fillText('← → / WASD  —  двигаться    ↑ / W / Space  —  прыжок (двойной прыжок!)', W/2, H - 40);
+    ctx.fillText(IS_TOUCH ? '◀ ▶  —  двигаться    ⤒  —  прыжок (двойной прыжок!)'
+                          : '← → / WASD  —  двигаться    ↑ / W / Space  —  прыжок (двойной прыжок!)', W/2, H - 40);
     ctx.restore();
   }
 };

@@ -1,0 +1,16 @@
+{
+  "name": "dream_shards",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "cap:sync": "npx cap sync android",
+    "build:android": "node scripts/build-android.cjs"
+  },
+  "dependencies": {
+    "@capacitor/android": "^8.6.2",
+    "@capacitor/core": "^8.6.2"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^8.6.2"
+  }
+}

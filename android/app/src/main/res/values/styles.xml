@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <!-- The activity's theme once it runs: Capacitor's BridgeActivity switches
+         to it from the launch theme in onCreate. -->
+    <style name="AppTheme.NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:background">@null</item>
+        <!-- The window shows through until the WebView paints, and Capacitor's
+             SystemBars plugin paints the decor view with it too: the app's
+             background colour, not the light theme's near-white. -->
+        <item name="android:windowBackground">@color/app_background</item>
+        <!-- The web UI is always light; never let the OS force-dark the window
+             (and the WebView inside it). Honoured on API 29+; silently ignored
+             on older. Belt-and-suspenders with the forced MODE_NIGHT_NO in
+             MainActivity. -->
+        <item name="android:forceDarkAllowed">false</item>
+    </style>
+
+
+    <!-- The launch window, shown from the tap on the icon until the activity
+         draws. Stock Android 12+ fills it with windowSplashScreenBackground.
+         HyperOS covers it with a colour layer of its own (PreStartingManager),
+         taken from this theme at the app's first launch and kept per package
+         for good; left alone the window background is the system light
+         theme's, near-white. So the splash background, the window background
+         and the colorBackground behind them are all the app's background
+         colour. -->
+    <style name="AppTheme.NoActionBarLaunch" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/app_background</item>
+        <item name="android:windowBackground">@color/app_background</item>
+        <item name="android:colorBackground">@color/app_background</item>
+        <!-- Light bar icons on the dark background. -->
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="27">false</item>
+    </style>
+</resources>

@@ -17,6 +17,16 @@ const Input = (() => {
   });
 
   return {
+    // Virtual keys (touch controls, js/touch.js): same path as a real key.
+    press(code) {
+      if (!keys[code]) justPressed[code] = true;
+      keys[code] = true;
+    },
+    release(code) {
+      if (!keys[code]) return;
+      keys[code] = false;
+      justReleased[code] = true;
+    },
     isDown(code) { return !!keys[code]; },
     wasPressed(code) { return !!justPressed[code]; },
     wasReleased(code) { return !!justReleased[code]; },

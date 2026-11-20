@@ -811,13 +811,13 @@ function draw() {
   if (state === State.DEAD) {
     const a = Math.min(1, messageTimer / 30);
     const sub = level.chaser
-      ? 'Кошмар поглотил тебя. Прыжок — попробовать снова'
-      : 'Прыжок — вернуться с чекпоинта';
+      ? (IS_TOUCH ? 'Кошмар поглотил тебя. Коснись — попробовать снова' : 'Кошмар поглотил тебя. Прыжок — попробовать снова')
+      : (IS_TOUCH ? 'Коснись — вернуться с чекпоинта' : 'Прыжок — вернуться с чекпоинта');
     UI.drawMessage(ctx, W, H, '— ты растворился —', sub, a);
   }
   if (state === State.LEVEL_COMPLETE) {
     const a = Math.min(1, messageTimer / 30);
-    UI.drawMessage(ctx, W, H, 'Сон завершён', 'Прыжок — следующий сон', a);
+    UI.drawMessage(ctx, W, H, 'Сон завершён', IS_TOUCH ? 'Коснись — следующий сон' : 'Прыжок — следующий сон', a);
   }
 }
 
@@ -859,7 +859,7 @@ function drawDJHint(cy = H / 2 - 60) {
   ctx.fillStyle = '#dde8ff';
   ctx.font = 'bold 13px sans-serif';
   ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-  ctx.fillText('SPACE', kx, ky + 1);
+  ctx.fillText(IS_TOUCH ? '⤒' : 'SPACE', kx, ky + 1);
 
   // текст
   ctx.globalAlpha = 0.96 * pulse;
@@ -931,7 +931,8 @@ function drawGravityIndicator() {
 
   // ── размеры и позиция ─────────────────────────────────────────────────────
   const PW = 86, PH = 96;
-  const px = W - PW - 16, py = H - PH - 16;
+  // touch: the jump button lives in the bottom-right corner — move the panel up
+  const px = W - PW - 16, py = IS_TOUCH ? 56 : H - PH - 16;
   const cx = px + PW / 2;
   const SURF = 9;
   const SX = px + 8, SW = PW - 16;
@@ -1202,7 +1203,7 @@ function drawWallIndicator() {
   ctx.globalAlpha = 0.55;
   ctx.fillStyle = '#9080c0';
   ctx.font = '11px sans-serif';
-  ctx.fillText('←/→ — стена', x, y + 26);
+  ctx.fillText(IS_TOUCH ? '◀/▶ — стена' : '←/→ — стена', x, y + 26);
   ctx.restore();
 }
 
@@ -1421,7 +1422,7 @@ function drawCutscene() {
     ctx.fillStyle = '#9080b0';
     ctx.font = '13px sans-serif';
     ctx.textAlign = 'center';
-    ctx.fillText('[ Space — пропустить ]', W / 2, H - 24);
+    ctx.fillText(IS_TOUCH ? '[ Коснись — пропустить ]' : '[ Space — пропустить ]', W / 2, H - 24);
     ctx.restore();
   }
 
@@ -1596,7 +1597,7 @@ function drawIntroCutscene() {
     ctx.fillStyle = '#9080b0';
     ctx.font = '13px sans-serif';
     ctx.textAlign = 'center';
-    ctx.fillText('[ Space — пропустить ]', W / 2, H - 24);
+    ctx.fillText(IS_TOUCH ? '[ Коснись — пропустить ]' : '[ Space — пропустить ]', W / 2, H - 24);
     ctx.restore();
   }
 
@@ -1693,11 +1694,11 @@ function drawIntroScreen() {
   ctx.font = '15px sans-serif';
   const levels = [
     'Сон 1 — Кошмар (преследователь)',
-    'Сон 2 — Падение (↑/W — потолок, ↓/S — пол)',
+    IS_TOUCH ? 'Сон 2 — Падение (G — сменить гравитацию)' : 'Сон 2 — Падение (↑/W — потолок, ↓/S — пол)',
     'Сон 3 — Спокойный (туториал)',
     'Сон 4 — Водный (слабая гравитация)',
     'Сон 5 — Ломаный (исчезающие платформы)',
-    'Сон 6 — Горизонтальный (←/→ — стена, ↑/↓ — бег, Space — прыжок)',
+    IS_TOUCH ? 'Сон 6 — Горизонтальный (◀/▶ — стена, ▲/▼ — бег, ⤒ — прыжок)' : 'Сон 6 — Горизонтальный (←/→ — стена, ↑/↓ — бег, Space — прыжок)',
   ];
   levels.forEach((l, i) => {
     ctx.fillText(l, W/2, H/2 + 20 + i * 24);
@@ -1707,7 +1708,7 @@ function drawIntroScreen() {
   ctx.globalAlpha = pulse;
   ctx.fillStyle = '#b090ff';
   ctx.font = '18px sans-serif';
-  ctx.fillText('[ Space / ↑ — начать ]', W/2, H/2 + 180);
+  ctx.fillText(IS_TOUCH ? '[ Коснись экрана — начать ]' : '[ Space / ↑ — начать ]', W/2, H/2 + 180);
   ctx.restore();
 }
 
